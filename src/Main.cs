@@ -5,14 +5,14 @@ namespace XmlTranslate.src
 {
     internal class XmlTranslate
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine("input path please");
             }
             ProcessPath(args[0]);
-
+            return 0;
         }
 
         private static async Task<string> TranslateText(string nodeText)
