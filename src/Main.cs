@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Xml;
 using DeepL;
 
@@ -11,17 +7,13 @@ namespace XmlTranslate.src
     {
         public static void Main(string[] args)
         {
-            if (args == null)
+            if (args == null || args.Length == 0)
             {
                 Console.WriteLine("input path please");
             }
-            Directory.CreateDirectory(Path.Combine(args[0], "output"));
             ProcessPath(args[0]);
 
         }
-
-
-
 
         private static async Task<string> TranslateText(string nodeText)
         {
@@ -47,16 +39,22 @@ namespace XmlTranslate.src
 
         private static void ProcessPath(string inputPath)
         {
+            string outputPath = Path.Combine(inputPath, "output");
+            if (!Directory.Exists(outputPath))
+            {
+                Directory.CreateDirectory(outputPath);
+            }
+
             if (File.Exists(inputPath))
             {
-                TransformXML(inputPath, Path.Combine(inputPath, "output"));
+                TransformXML(inputPath, outputPath);
             }
             if (Directory.Exists(inputPath))
             {
                 string[] xmlFiles = Directory.GetFiles(inputPath, "*.xml", SearchOption.TopDirectoryOnly);
                 foreach (string xmlFile in xmlFiles)
                 {
-                    TransformXML(xmlFile, Path.Combine(inputPath, "output")); ;
+                    TransformXML(xmlFile, outputPath);
                 }
             }
         }
@@ -68,19 +66,41 @@ namespace XmlTranslate.src
             // Encoding encoding = Encoding.GetEncoding("iso-8859-1");
             var nodes = xml.SelectNodes("//*")?
               .Cast<XmlNode>()
-              .Where(node => !IsPath(node))
-              .ToList();
+              .Where(node => !IsPath(node));
             if (nodes == null) return;
 
             var newDic = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             //Dictionary wird gefilled von Terminologie Datenbank!
             IEnumerable<Task> translationTasks = nodes.Select(async node =>
             {
-                node.InnerText = newDic.TryGetValue(node.InnerText, out string? value) && value != null ? value : await TranslateText(node.InnerText);
+                if (!string.IsNullOrEmpty(node.InnerText.ToString()))
+                {
+                    node.InnerText = newDic.TryGetValue(node.InnerText, out string? value) && value != null ? value : await TranslateText(node.InnerText);
+                }
             });
-            //Falls nicht in Terminologie, evtl in extra Dictionary speichern? "Ressources" oder in NewDic für andere API Calls
+            //Falls nicht in Terminologie, evtl in extra Dictionary speichern?
+            // "Ressources" oder in NewDic für weitere API Calls
             await Task.WhenAll(translationTasks);
             xml.Save(Path.Combine(outputPath, Path.GetFileName(inputPath))); //EVTL NOCH ENCODING!
+        }
+
+
+        private static void WriteCsv(string filePath, List<Tuple<string, string>> translations)
+        {
+            string csvPath = Path.Combine(filePath, "output.csv");
+            if (File.Exists(csvPath))
+            {
+                File.Delete(csvPath);
+            }
+            using (var sw = new StreamWriter(csvPath)) //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
+            {
+                foreach (Tuple<string, string> trans in translations)
+                {
+                    sw.WriteLine(String.Join(";", trans));
+                }
+            }
+            return;
+            //TODO for future use
         }
 
         private static bool IsPath(XmlNode node)
