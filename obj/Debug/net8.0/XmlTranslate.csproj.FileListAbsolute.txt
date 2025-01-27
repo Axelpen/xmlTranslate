@@ -1,0 +1,14 @@
+/home/alexuser/Documents/XmlTranslate/bin/Debug/net8.0/XmlTranslate
+/home/alexuser/Documents/XmlTranslate/bin/Debug/net8.0/XmlTranslate.deps.json
+/home/alexuser/Documents/XmlTranslate/bin/Debug/net8.0/XmlTranslate.runtimeconfig.json
+/home/alexuser/Documents/XmlTranslate/bin/Debug/net8.0/XmlTranslate.dll
+/home/alexuser/Documents/XmlTranslate/bin/Debug/net8.0/XmlTranslate.pdb
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.GeneratedMSBuildEditorConfig.editorconfig
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.AssemblyInfoInputs.cache
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.AssemblyInfo.cs
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.csproj.CoreCompileInputs.cache
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.dll
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/refint/XmlTranslate.dll
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.pdb
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/XmlTranslate.genruntimeconfig.cache
+/home/alexuser/Documents/XmlTranslate/obj/Debug/net8.0/ref/XmlTranslate.dll
