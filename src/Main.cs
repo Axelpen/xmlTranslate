@@ -5,19 +5,23 @@ namespace XmlTranslate.src
 {
     internal class XmlTranslate
     {
+        private static List<Tuple<string, string>> oldNewTrans = new();
         public static int Main(string[] args)
         {
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine("input path please");
+                return 1;
             }
+            Console.WriteLine(args[0]);
             ProcessPath(args[0]);
+            WriteCsv(args[0], oldNewTrans);
             return 0;
         }
 
         private static async Task<string> TranslateText(string nodeText)
         {
-            var authKey = ""; //to be changed
+            var authKey = "27f0d08b-c030-4bf9-bd4a-e9a9066d561a:fx"; //to be changed
             var translator = new Translator(authKey);
 
             try
@@ -75,29 +79,30 @@ namespace XmlTranslate.src
             {
                 if (!string.IsNullOrEmpty(node.InnerText.ToString()))
                 {
+                    string placeHolder = node.InnerText.ToString();
                     node.InnerText = newDic.TryGetValue(node.InnerText, out string? value) && value != null ? value : await TranslateText(node.InnerText);
+                    oldNewTrans.Add(Tuple.Create(placeHolder, node.InnerText));
+                    Console.WriteLine($"{node.InnerText} +++++ {placeHolder}");
                 }
             });
             //Falls nicht in Terminologie, evtl in extra Dictionary speichern?
             // "Ressources" oder in NewDic für weitere API Calls
             await Task.WhenAll(translationTasks);
-            xml.Save(Path.Combine(outputPath, Path.GetFileName(inputPath))); //EVTL NOCH ENCODING!
+            xml.Save(Path.Combine(outputPath, "test"));
         }
-
 
         private static void WriteCsv(string filePath, List<Tuple<string, string>> translations)
         {
             string csvPath = Path.Combine(filePath, "output.csv");
+            /*string csvPath = "C:\\Users\\alexander.penck.INTERN\\Desktop\\testHTML";*/
             if (File.Exists(csvPath))
             {
                 File.Delete(csvPath);
             }
-            using (var sw = new StreamWriter(csvPath)) //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
+            using var sw = new StreamWriter(csvPath); //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
+            foreach (Tuple<string, string> trans in translations)
             {
-                foreach (Tuple<string, string> trans in translations)
-                {
-                    sw.WriteLine(String.Join(";", trans));
-                }
+                sw.WriteLine(String.Join(";", trans));
             }
             return;
             //TODO for future use

@@ -5096,24 +5096,26 @@
     ]
   },
   "packageFolders": {
-    "/home/alexuser/.nuget/packages/": {}
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/alexuser/Documents/XmlTranslate/XmlTranslate.csproj",
+      "projectUniqueName": "C:\\prj\\Azubi\\APE\\xmlTranslate\\XmlTranslate.csproj",
       "projectName": "XmlTranslate",
-      "projectPath": "/home/alexuser/Documents/XmlTranslate/XmlTranslate.csproj",
-      "packagesPath": "/home/alexuser/.nuget/packages/",
-      "outputPath": "/home/alexuser/Documents/XmlTranslate/obj/",
+      "projectPath": "C:\\prj\\Azubi\\APE\\xmlTranslate\\XmlTranslate.csproj",
+      "packagesPath": "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\",
+      "outputPath": "C:\\prj\\Azubi\\APE\\xmlTranslate\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/alexuser/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\alexander.penck.INTERN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5126,6 +5128,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -5152,18 +5159,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.111/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.307/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
