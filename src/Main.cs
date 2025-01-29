@@ -6,22 +6,26 @@ namespace XmlTranslate.src
     internal class XmlTranslate
     {
         private static List<Tuple<string, string>> oldNewTrans = new();
-        public static int Main(string[] args)
+
+        public static async Task<int> Main(string[] args)
         {
+            string inputPathh = @"C:\Users\alexander.penck.INTERN\Desktop\testHTML\superTest";
+            Console.WriteLine("ayay");
+            Console.WriteLine("Captain ayay");
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine("input path please");
-                return 1;
+                // return 1;
             }
-            Console.WriteLine(args[0]);
-            ProcessPath(args[0]);
-            WriteCsv(args[0], oldNewTrans);
+            /*Console.WriteLine(args[0]);*/
+            await ProcessPath(inputPathh);
+            WriteCsv(inputPathh, oldNewTrans);
             return 0;
         }
 
         private static async Task<string> TranslateText(string nodeText)
         {
-            var authKey = "27f0d08b-c030-4bf9-bd4a-e9a9066d561a:fx"; //to be changed
+            var authKey = "";
             var translator = new Translator(authKey);
 
             try
@@ -41,7 +45,7 @@ namespace XmlTranslate.src
             }
         }
 
-        private static void ProcessPath(string inputPath)
+        private static async Task ProcessPath(string inputPath)
         {
             string outputPath = Path.Combine(inputPath, "output");
             if (!Directory.Exists(outputPath))
@@ -51,19 +55,19 @@ namespace XmlTranslate.src
 
             if (File.Exists(inputPath))
             {
-                TransformXML(inputPath, outputPath);
+                await TransformXML(inputPath, outputPath);
             }
             if (Directory.Exists(inputPath))
             {
                 string[] xmlFiles = Directory.GetFiles(inputPath, "*.xml", SearchOption.TopDirectoryOnly);
                 foreach (string xmlFile in xmlFiles)
                 {
-                    TransformXML(xmlFile, outputPath);
+                    await TransformXML(xmlFile, outputPath);
                 }
             }
         }
 
-        private static async void TransformXML(string inputPath, string outputPath)
+        private static async Task TransformXML(string inputPath, string outputPath)
         {
             XmlDocument xml = new();
             xml.Load(inputPath);
@@ -88,7 +92,7 @@ namespace XmlTranslate.src
             //Falls nicht in Terminologie, evtl in extra Dictionary speichern?
             // "Ressources" oder in NewDic für weitere API Calls
             await Task.WhenAll(translationTasks);
-            xml.Save(Path.Combine(outputPath, "test"));
+            xml.Save(Path.Combine(outputPath, "test.xml"));
         }
 
         private static void WriteCsv(string filePath, List<Tuple<string, string>> translations)
@@ -110,7 +114,8 @@ namespace XmlTranslate.src
 
         private static bool IsPath(XmlNode node)
         {
-            return node.InnerText.Contains("/") || node.InnerText.Contains("\\");
+            return false;
+            //return node.InnerText.Contains("/") || node.InnerText.Contains("\\");
         }
     }
 }
