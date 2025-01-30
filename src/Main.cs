@@ -1,4 +1,6 @@
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using DeepL;
 
 namespace XmlTranslate.src
@@ -6,7 +8,7 @@ namespace XmlTranslate.src
     internal class XmlTranslate
     {
         private static List<Tuple<string, string>> oldNewTrans = new();
-
+        private static string xPathExpression = @"/*/*[not(name() = 'DateiName' or name() = 'DateiDatum' or name() = 'BitmapPfad' or name() = 'AltBitmapPfad' or name() = 'MenueBitmap')]";
         public static async Task<int> Main(string[] args)
         {
             string inputPathh = @"C:\Users\alexander.penck.INTERN\Desktop\testHTML\superTest";
@@ -69,30 +71,25 @@ namespace XmlTranslate.src
 
         private static async Task TransformXML(string inputPath, string outputPath)
         {
-            XmlDocument xml = new();
-            xml.Load(inputPath);
+            XDocument xml = XDocument.Load(inputPath);
             // Encoding encoding = Encoding.GetEncoding("iso-8859-1");
-            var nodes = xml.SelectNodes("//*")?
-              .Cast<XmlNode>()
-              .Where(node => !IsPath(node));
+            var nodes = xml.XPathSelectElements(xPathExpression)
+                       .Where(node => !IsPath(node));
+
             if (nodes == null) return;
 
             var newDic = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             //Dictionary wird gefilled von Terminologie Datenbank!
-            IEnumerable<Task> translationTasks = nodes.Select(async node =>
+
+
+            foreach (var node in nodes)
             {
-                if (!string.IsNullOrEmpty(node.InnerText.ToString()))
-                {
-                    string placeHolder = node.InnerText.ToString();
-                    node.InnerText = newDic.TryGetValue(node.InnerText, out string? value) && value != null ? value : await TranslateText(node.InnerText);
-                    oldNewTrans.Add(Tuple.Create(placeHolder, node.InnerText));
-                    Console.WriteLine($"{node.InnerText} +++++ {placeHolder}");
-                }
-            });
-            //Falls nicht in Terminologie, evtl in extra Dictionary speichern?
-            // "Ressources" oder in NewDic für weitere API Calls
-            await Task.WhenAll(translationTasks);
-            xml.Save(Path.Combine(outputPath, "test.xml"));
+                Console.WriteLine($"{node.Name} {node.Value}");
+            }
+
+            //node.Name = Tag, InnerText = Text
+
+
         }
 
         private static void WriteCsv(string filePath, List<Tuple<string, string>> translations)
@@ -103,7 +100,9 @@ namespace XmlTranslate.src
             {
                 File.Delete(csvPath);
             }
-            using var sw = new StreamWriter(csvPath); //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
+            bool ja = true;
+            using var sw = new StreamWriter(csvPath);
+            //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
             foreach (Tuple<string, string> trans in translations)
             {
                 sw.WriteLine(String.Join(";", trans));
@@ -112,10 +111,9 @@ namespace XmlTranslate.src
             //TODO for future use
         }
 
-        private static bool IsPath(XmlNode node)
+        private static bool IsPath(XElement node)
         {
-            return false;
-            //return node.InnerText.Contains("/") || node.InnerText.Contains("\\");
+            return node.Value.Contains("/") || node.Value.Contains("\\");
         }
     }
 }

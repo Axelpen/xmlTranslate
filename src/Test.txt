@@ -1,0 +1,10 @@
+//oh god extracting every text from every node doesnt work,
+//the deepL APi is too slow and limits requests after
+//a while, especially when running them all at the same time.
+//Next idea would be to just let DeepL API translate the whole
+//document, change the Tags of the already translated paragraphs
+//(using terminology) to something like "xexampletag", then 
+//use the IgnoreTags Option from DeepL, 
+//at the end removing the extra character from the tag so MSXSL works....
+//god this sucks
+
