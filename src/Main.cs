@@ -1,17 +1,22 @@
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using DeepL;
+//XDocument scheint besser zu funktionieren, hat auch eine 
+//Methode um Node.Name zu renamen. Das macht das ganze sehr 
+//viel einfacher als der Hacky Weg mit XmlDocument. 
 
 namespace XmlTranslate.src
 {
     internal class XmlTranslate
     {
+        //In C-Sharp geht "~" nicht für home Directory auf Linux, unten ist ein Workaround..
+        static string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
         private static List<Tuple<string, string>> oldNewTrans = new();
         private static string xPathExpression = @"/*/*[not(name() = 'DateiName' or name() = 'DateiDatum' or name() = 'BitmapPfad' or name() = 'AltBitmapPfad' or name() = 'MenueBitmap')]";
         public static async Task<int> Main(string[] args)
         {
-            string inputPathh = @"C:\Users\alexander.penck.INTERN\Desktop\testHTML\superTest";
+            string inputPathh = Path.Combine(userHome, "Documents", "testtt.xml");
             Console.WriteLine("ayay");
             Console.WriteLine("Captain ayay");
             if (args == null || args.Length == 0)
@@ -21,7 +26,7 @@ namespace XmlTranslate.src
             }
             /*Console.WriteLine(args[0]);*/
             await ProcessPath(inputPathh);
-            WriteCsv(inputPathh, oldNewTrans);
+            ///  WriteCsv(inputPathh, oldNewTrans);
             return 0;
         }
 
@@ -50,10 +55,10 @@ namespace XmlTranslate.src
         private static async Task ProcessPath(string inputPath)
         {
             string outputPath = Path.Combine(inputPath, "output");
-            if (!Directory.Exists(outputPath))
-            {
-                Directory.CreateDirectory(outputPath);
-            }
+            /*if (!Directory.Exists(outputPath))*/
+            /*{*/
+            /*    Directory.CreateDirectory(outputPath);*/
+            /*}*/
 
             if (File.Exists(inputPath))
             {
@@ -88,8 +93,7 @@ namespace XmlTranslate.src
             }
 
             //node.Name = Tag, InnerText = Text
-
-
+            xml.Save(Path.Combine(userHome, "Documents", "test.xml"));
         }
 
         private static void WriteCsv(string filePath, List<Tuple<string, string>> translations)
