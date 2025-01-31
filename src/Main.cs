@@ -11,20 +11,21 @@ namespace XmlTranslate.src
     {
         //In C-Sharp geht "~" nicht für home Directory auf Linux, unten ist ein Workaround..
         static string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
+        private static List<string> usedTags = new();
         private static List<Tuple<string, string>> oldNewTrans = new();
-        private static string xPathExpression = @"/*/*[not(name() = 'DateiName' or name() = 'DateiDatum' or name() = 'BitmapPfad' or name() = 'AltBitmapPfad' or name() = 'MenueBitmap')]";
+
+
+        private static readonly string xPathExpression = @"/*/*[not(name() = 'DateiName' or name() = 'DateiDatum' or name() = 'BitmapPfad' or name() = 'AltBitmapPfad' or name() = 'MenueBitmap')]";
+
+
         public static async Task<int> Main(string[] args)
         {
             string inputPathh = Path.Combine(userHome, "Documents", "testtt.xml");
-            Console.WriteLine("ayay");
-            Console.WriteLine("Captain ayay");
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine("input path please");
                 // return 1;
             }
-            /*Console.WriteLine(args[0]);*/
             await ProcessPath(inputPathh);
             ///  WriteCsv(inputPathh, oldNewTrans);
             return 0;
@@ -89,7 +90,12 @@ namespace XmlTranslate.src
 
             foreach (var node in nodes)
             {
-                Console.WriteLine($"{node.Name} {node.Value}");
+                if (newDic.TryGetValue(node.Value, out string? value))
+                {
+
+                    node.Name += "skibidi";
+                    usedTags.Add(node.Name.ToString());
+                }
             }
 
             //node.Name = Tag, InnerText = Text
@@ -104,7 +110,6 @@ namespace XmlTranslate.src
             {
                 File.Delete(csvPath);
             }
-            bool ja = true;
             using var sw = new StreamWriter(csvPath);
             //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
             foreach (Tuple<string, string> trans in translations)
