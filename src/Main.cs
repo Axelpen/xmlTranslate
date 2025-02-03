@@ -1,6 +1,8 @@
 using System.Xml.Linq;
 using System.Xml.XPath;
 using DeepL;
+using Cobus.Ncad.AdvancedDialogs;
+
 //XDocument scheint besser zu funktionieren, hat auch eine 
 //Methode um Node.Name zu renamen. Das macht das ganze sehr 
 //viel einfacher als der Hacky Weg mit XmlDocument. 
@@ -97,9 +99,9 @@ namespace XmlTranslate.src
                     usedTags.Add(node.Name.ToString());
                 }
             }
-
+            _ = await TranslateXml.TranslateDocument(inputPath, outputPath, usedTags);
             //node.Name = Tag, InnerText = Text
-            xml.Save(Path.Combine(userHome, "Documents", "test.xml"));
+            //xml.Save(Path.Combine(userHome, "Documents", "test.xml")); TranslateDocument speichert die Xml schon!
         }
 
         private static void WriteCsv(string filePath, List<Tuple<string, string>> translations)

@@ -62,3 +62,4 @@ C:/prj/Azubi/APE/xmlTranslate/obj/Debug/net8.0/refint/XmlTranslate.dll
 C:/prj/Azubi/APE/xmlTranslate/obj/Debug/net8.0/XmlTranslate.pdb
 C:/prj/Azubi/APE/xmlTranslate/obj/Debug/net8.0/XmlTranslate.genruntimeconfig.cache
 C:/prj/Azubi/APE/xmlTranslate/obj/Debug/net8.0/ref/XmlTranslate.dll
+/home/alexuser/Documents/XmlTranslate/bin/Debug/net8.0/ccNcadAdvancedDialogsJ9.std.dll

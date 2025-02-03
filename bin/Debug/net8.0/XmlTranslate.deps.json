@@ -9,7 +9,8 @@
       "XmlTranslate/1.0.0": {
         "dependencies": {
           "DeepL.net": "1.12.0",
-          "DotNetEnv": "3.1.1"
+          "DotNetEnv": "3.1.1",
+          "ccNcadAdvancedDialogsJ9.std": "21.0.0.0"
         },
         "runtime": {
           "XmlTranslate.dll": {}
@@ -861,6 +862,14 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "ccNcadAdvancedDialogsJ9.std/21.0.0.0": {
+        "runtime": {
+          "ccNcadAdvancedDialogsJ9.std.dll": {
+            "assemblyVersion": "21.0.0.0",
+            "fileVersion": "21.0.0.0"
+          }
+        }
       }
     }
   },
@@ -1499,6 +1508,11 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "ccNcadAdvancedDialogsJ9.std/21.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
