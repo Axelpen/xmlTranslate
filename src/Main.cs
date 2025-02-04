@@ -1,8 +1,7 @@
+using System.Text;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using DeepL;
 using Cobus.Ncad.AdvancedDialogs;
-
 //XDocument scheint besser zu funktionieren, hat auch eine 
 //Methode um Node.Name zu renamen. Das macht das ganze sehr 
 //viel einfacher als der Hacky Weg mit XmlDocument. 
@@ -15,6 +14,7 @@ namespace XmlTranslate.src
         static string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         private static List<string> usedTags = new();
         private static List<Tuple<string, string>> oldNewTrans = new();
+        public static readonly string keyWord = "xztzt";
 
 
         private static readonly string xPathExpression = @"/*/*[not(name() = 'DateiName' or name() = 'DateiDatum' or name() = 'BitmapPfad' or name() = 'AltBitmapPfad' or name() = 'MenueBitmap')]";
@@ -33,27 +33,6 @@ namespace XmlTranslate.src
             return 0;
         }
 
-        private static async Task<string> TranslateText(string nodeText)
-        {
-            var authKey = "";
-            var translator = new Translator(authKey);
-
-            try
-            {
-                var translatedText = await translator.TranslateTextAsync(
-                    nodeText,
-                    LanguageCode.German,
-                    LanguageCode.Polish
-                    );
-
-                return translatedText.Text;
-            }
-            catch (DeepLException e)
-            {
-                Console.WriteLine($"oh noo {e}");
-                return nodeText;
-            }
-        }
 
         private static async Task ProcessPath(string inputPath)
         {
@@ -90,12 +69,12 @@ namespace XmlTranslate.src
             //Dictionary wird gefilled von Terminologie Datenbank!
 
 
-            foreach (var node in nodes)
+            foreach (XElement? node in nodes)
             {
                 if (newDic.TryGetValue(node.Value, out string? value))
                 {
 
-                    node.Name += "skibidi";
+                    node.Name = ManipulateXml.RenameNodes(node, false);
                     usedTags.Add(node.Name.ToString());
                 }
             }
@@ -112,11 +91,10 @@ namespace XmlTranslate.src
             {
                 File.Delete(csvPath);
             }
-            using var sw = new StreamWriter(csvPath);
-            //dumb ah ah streamwriter doesnt accept csvpath,false,encoding as parameters?
+            using var sw = new StreamWriter(csvPath, false, Encoding.GetEncoding("iso-8859-1"));
             foreach (Tuple<string, string> trans in translations)
             {
-                sw.WriteLine(String.Join(";", trans));
+                sw.WriteLine(string.Join(";", trans));
             }
             return;
             //TODO for future use
@@ -125,6 +103,12 @@ namespace XmlTranslate.src
         private static bool IsPath(XElement node)
         {
             return node.Value.Contains("/") || node.Value.Contains("\\");
+        }
+        private static string SearchTerminology(string nodeText)
+        {
+            ccNcadAdvancedDialogInfo dialogInfo = new ccNcadAdvancedDialogInfo();
+            dialogInfo = new ccNcadAdvancedDialogInfo(nodeText, 0, true);
+            return dialogInfo.ToString();
         }
     }
 }

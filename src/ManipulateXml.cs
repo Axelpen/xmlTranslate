@@ -13,17 +13,24 @@ namespace XmlTranslate.src
 
             foreach (var node in nodesToChange)
             {
-                node.Name = node.Name.ToString()[..^7]; //Removes last 7 Chars, aka "Skibidi":P
+                if (node == null) continue;
+                node.Name = RenameNodes(node, true);
             }
             return inputXml;
         }
 
-        private static bool ContainsKeyWord(XElement node) => node.Name.LocalName.Contains("skibidi");
-
-        public static void RenameNodes(XElement node, bool alreadyTransformed)
+        private static bool ContainsKeyWord(XElement node)
         {
-            // AlreadyTransformed = true, remove das das Keyword, else adde das Keyword
+            return node.Name.LocalName.Contains(XmlTranslate.keyWord);
+        }
 
+        public static string RenameNodes(XElement node, bool alreadyTransformed)
+        {
+            string newName = alreadyTransformed
+              ? node.Name.ToString()[..^XmlTranslate.keyWord.Length]
+              : node.Name.ToString() + XmlTranslate.keyWord;
+
+            return newName;
         }
     }
 }

@@ -1,24 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "xaH912N76YHAcoqFHS8Fbh57VeqTcXt4igHkJxzgnGcXrEl4b2m1SlRHZa7ltCSUB7j9JVKUwbEcy8kCEt1zqA==",
+  "dgSpecHash": "6GWd3NBTFyA=",
   "success": true,
-  "projectFilePath": "/home/alexuser/Documents/XmlTranslate/XmlTranslate.csproj",
+  "projectFilePath": "C:\\prj\\Azubi\\APE\\xmlTranslate\\XmlTranslate.csproj",
   "expectedPackageFiles": [
-    "/home/alexuser/.nuget/packages/deepl.net/1.12.0/deepl.net.1.12.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.dependencyinjection/5.0.0/microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/5.0.0/microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.http/5.0.0/microsoft.extensions.http.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.http.polly/5.0.1/microsoft.extensions.http.polly.5.0.1.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.logging/5.0.0/microsoft.extensions.logging.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.logging.abstractions/5.0.0/microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/polly/7.1.0/polly.7.1.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/polly.extensions.http/3.0.0/polly.extensions.http.3.0.0.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/system.text.json/5.0.2/system.text.json.5.0.2.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.netcore.app.ref/7.0.20/microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.20/microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
-    "/home/alexuser/.nuget/packages/microsoft.netcore.app.host.linux-x64/7.0.20/microsoft.netcore.app.host.linux-x64.7.0.20.nupkg.sha512"
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\deepl.net\\1.12.0\\deepl.net.1.12.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.0\\microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.http\\5.0.0\\microsoft.extensions.http.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.http.polly\\5.0.1\\microsoft.extensions.http.polly.5.0.1.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\polly\\7.1.0\\polly.7.1.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\polly.extensions.http\\3.0.0\\polly.extensions.http.3.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.penck.INTERN\\.nuget\\packages\\system.text.json\\5.0.2\\system.text.json.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }
